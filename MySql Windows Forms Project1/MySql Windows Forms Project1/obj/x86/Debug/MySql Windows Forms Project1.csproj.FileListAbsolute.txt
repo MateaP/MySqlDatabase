@@ -11,3 +11,16 @@ c:\users\matea\documents\visual studio 2013\Projects\MySql Windows Forms Project
 c:\users\matea\documents\visual studio 2013\Projects\MySql Windows Forms Project1\MySql Windows Forms Project1\obj\x86\Debug\MySql Windows Forms Project1.csproj.GenerateResource.Cache
 c:\users\matea\documents\visual studio 2013\Projects\MySql Windows Forms Project1\MySql Windows Forms Project1\obj\x86\Debug\MySql Windows Forms Project1.exe
 c:\users\matea\documents\visual studio 2013\Projects\MySql Windows Forms Project1\MySql Windows Forms Project1\obj\x86\Debug\MySql Windows Forms Project1.pdb
+C:\Users\matea\Repos\MySqlDatabase\MySqlDatabase\MySql Windows Forms Project1\MySql Windows Forms Project1\bin\Debug\MySql Windows Forms Project1.exe.config
+C:\Users\matea\Repos\MySqlDatabase\MySqlDatabase\MySql Windows Forms Project1\MySql Windows Forms Project1\obj\x86\Debug\MySql Windows Forms Project1.exe
+C:\Users\matea\Repos\MySqlDatabase\MySqlDatabase\MySql Windows Forms Project1\MySql Windows Forms Project1\obj\x86\Debug\MySql Windows Forms Project1.pdb
+C:\Users\matea\Repos\MySqlDatabase\MySqlDatabase\MySql Windows Forms Project1\MySql Windows Forms Project1\bin\Debug\MySql Windows Forms Project1.exe
+C:\Users\matea\Repos\MySqlDatabase\MySqlDatabase\MySql Windows Forms Project1\MySql Windows Forms Project1\bin\Debug\MySql Windows Forms Project1.pdb
+C:\Users\matea\Repos\MySqlDatabase\MySqlDatabase\MySql Windows Forms Project1\MySql Windows Forms Project1\obj\x86\Debug\MySql Windows Forms Project1.csprojResolveAssemblyReference.cache
+C:\Users\matea\Repos\MySqlDatabase\MySqlDatabase\MySql Windows Forms Project1\MySql Windows Forms Project1\obj\x86\Debug\MySql_Windows_Forms_Project1.frmanimals.resources
+C:\Users\matea\Repos\MySqlDatabase\MySqlDatabase\MySql Windows Forms Project1\MySql Windows Forms Project1\obj\x86\Debug\MySql_Windows_Forms_Project1.frmanimals1.resources
+C:\Users\matea\Repos\MySqlDatabase\MySqlDatabase\MySql Windows Forms Project1\MySql Windows Forms Project1\obj\x86\Debug\MySql_Windows_Forms_Project1.frmMain.resources
+C:\Users\matea\Repos\MySqlDatabase\MySqlDatabase\MySql Windows Forms Project1\MySql Windows Forms Project1\obj\x86\Debug\MySql_Windows_Forms_Project1.frmperson.resources
+C:\Users\matea\Repos\MySqlDatabase\MySqlDatabase\MySql Windows Forms Project1\MySql Windows Forms Project1\obj\x86\Debug\MySql_Windows_Forms_Project1.frmshirt.resources
+C:\Users\matea\Repos\MySqlDatabase\MySqlDatabase\MySql Windows Forms Project1\MySql Windows Forms Project1\obj\x86\Debug\MySql_Windows_Forms_Project1.Properties.Resources.resources
+C:\Users\matea\Repos\MySqlDatabase\MySqlDatabase\MySql Windows Forms Project1\MySql Windows Forms Project1\obj\x86\Debug\MySql Windows Forms Project1.csproj.GenerateResource.Cache

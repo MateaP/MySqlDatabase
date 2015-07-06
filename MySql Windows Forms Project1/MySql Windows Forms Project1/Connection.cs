@@ -14,39 +14,42 @@ namespace MySql_Windows_Forms_Project1
     public static class Connection
     {
 
-		/*
-		* Purpose :
-		* Input parameters : None
-		* returns : ....
-		* Date created :
-		* Date last changed :
-		* Author :
-		*/
+        /*
+        * Purpose : makes a connection with MySql server
+        * Input parameters : None
+        * returns : MySqlDataAdapter
+        * Date created : 06.07.2015
+        * Date last changed : 06.07.2015
+        * Author : Matea
+        */
         public static string retrieveConnection()
         {
-            //string connInfo = new prazen connection string, veruvam moze od methodite da se najde
+            string connInfo = String.Empty;
+            
             try
             {
-				connInfo = ConfigurationManager.ConnectionStrings["connect"].ConnectionString; 
+                connInfo = ConfigurationManager.ConnectionStrings["connect"].ConnectionString;
             }
             catch(Exception ex)
             {
-				throw new ArgumentExpection("Connection String connect was not found in app.config! Execution aborted");
+				throw new ArgumentException("Connection String connect was not found in app.config! Execution aborted");
             }
             return connInfo;
         }
 
         public static MySqlDataAdapter Connect(string command)
         {
-            //ConnectionStringSettings setting_constr = null;
-            //setting_constr = ConfigurationManager.ConnectionStrings["connect1"];
-            //string con_str = setting_constr.ConnectionString;
-
+            MySqlDataAdapter adapter = null;
             string str = retrieveConnection();
-            if(str != "")
-                return new MySqlDataAdapter(command, str);
-            return null;
-            
+            try
+            {         
+                adapter = new MySqlDataAdapter(command, str);
+            }
+            catch(Exception ex)
+            {
+                throw new ArgumentException("Connection String connect was found in app.config but the connection can not be established! Execution aborted");
+            }
+            return adapter;
         }
     }
 }
