@@ -14,27 +14,26 @@ namespace MySql_Windows_Forms_Project1
     public static class Connection
     {
 
+		/*
+		* Purpose :
+		* Input parameters : None
+		* returns : ....
+		* Date created :
+		* Date last changed :
+		* Author :
+		*/
         public static string retrieveConnection()
         {
-            ConnectionStringSettings setting_constr = null;
-            setting_constr = ConfigurationManager.ConnectionStrings["connect"];
-            string con_str = String.Empty;
+            //string connInfo = new prazen connection string, veruvam moze od methodite da se najde
             try
             {
-                con_str = setting_constr.ConnectionString; 
+				connInfo = ConfigurationManager.ConnectionStrings["connect"].ConnectionString; 
             }
-            catch(NullReferenceException)
+            catch(Exception ex)
             {
-                MessageBox.Show("The specified connection string does not exist!");
-                return String.Empty;
+				throw new ArgumentExpection("Connection String connect was not found in app.config! Execution aborted");
             }
-            catch(MySqlException)
-            {
-                MessageBox.Show("Error in the specified connection in app.config!");
-                return String.Empty;
-            }
-
-            return con_str;
+            return connInfo;
         }
 
         public static MySqlDataAdapter Connect(string command)
