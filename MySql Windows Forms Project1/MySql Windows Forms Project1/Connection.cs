@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
+using System.Configuration;
 
 namespace MySql_Windows_Forms_Project1
 {
@@ -17,8 +18,10 @@ namespace MySql_Windows_Forms_Project1
 
         public static MySqlDataAdapter Connect(string command)
         {
-            string strConn = "server=localhost;user id=root;password=0000;database=menagerie;";
-            MySqlDataAdapter ad = new MySqlDataAdapter(command, strConn);
+            ConnectionStringSettings setting_constr = null;
+            setting_constr = ConfigurationManager.ConnectionStrings["connect"];
+            string con_str = setting_constr.ConnectionString + Environment.NewLine;
+            MySqlDataAdapter ad = new MySqlDataAdapter(command, con_str);
             
             return ad;
         }
