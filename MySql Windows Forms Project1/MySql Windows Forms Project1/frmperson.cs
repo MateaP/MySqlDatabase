@@ -32,8 +32,7 @@ namespace MySql_Windows_Forms_Project1
 		
 		private void frmperson_Load(object sender, EventArgs e)
 		{
-			string strConn = "server=localhost;user id=root;password=0000;database=menagerie;";
-			ad = new MySqlDataAdapter("select * from `person`", strConn);
+			ad = Connection.Connect("select * from `person`");
 			MySqlCommandBuilder builder = new MySqlCommandBuilder(ad);
 			ad.Fill(this.newDataSet.person);
 			ad.DeleteCommand = builder.GetDeleteCommand();

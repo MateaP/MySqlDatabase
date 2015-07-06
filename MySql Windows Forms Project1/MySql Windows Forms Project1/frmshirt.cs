@@ -32,8 +32,7 @@ namespace MySql_Windows_Forms_Project1
 		
 		private void frmshirt_Load(object sender, EventArgs e)
 		{
-			string strConn = "server=localhost;user id=root;password=0000;database=menagerie;";
-			ad = new MySqlDataAdapter("select * from `shirt`", strConn);
+			ad = Connection.Connect("select * from `shirt`");
 			MySqlCommandBuilder builder = new MySqlCommandBuilder(ad);
 			ad.Fill(this.newDataSet.shirt);
 			ad.DeleteCommand = builder.GetDeleteCommand();

@@ -23,7 +23,7 @@ namespace MySql_Windows_Forms_Project1
 {
 	public partial class frmanimals : Form
 	{
-		private MySqlDataAdapter ad;
+        private MySqlDataAdapter ad;
 		
 		public frmanimals()
 		{
@@ -32,9 +32,8 @@ namespace MySql_Windows_Forms_Project1
 		
 		private void frmanimals_Load(object sender, EventArgs e)
 		{
-			string strConn = "server=localhost;user id=root;password=0000;database=menagerie;";
-			ad = new MySqlDataAdapter("select * from `animals`", strConn);
-			MySqlCommandBuilder builder = new MySqlCommandBuilder(ad);
+            ad = Connection.Connect("select * from `animals`");
+            MySqlCommandBuilder builder = new MySqlCommandBuilder(ad);
 			ad.Fill(this.newDataSet.animals);
 			ad.DeleteCommand = builder.GetDeleteCommand();
 			ad.UpdateCommand = builder.GetUpdateCommand();
