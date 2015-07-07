@@ -25,7 +25,7 @@ namespace MySql_Windows_Forms_Project1
         public static string retrieveConnection()
         {
             string connInfo = String.Empty;
-            RegexStringValidator r = new RegexStringValidator(@"^(server=[^=;]*)(;user id=[^=;]*)(;password=[^=;]*)(;database=[^=;]*)*;?$");
+            RegexStringValidator r = new RegexStringValidator(@"((.*(server|user id|password|database)=[^=;]*;){4})");
 
             try
             {
