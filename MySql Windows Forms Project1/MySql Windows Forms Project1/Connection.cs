@@ -25,16 +25,21 @@ namespace MySql_Windows_Forms_Project1
         public static string retrieveConnection()
         {
             string connInfo = String.Empty;
-            
+            RegexStringValidator r = new RegexStringValidator(@"^(server=[^=;]*)(;user id=[^=;]*)(;password=[^=;]*)(;database=[^=;]*)*;?$");
+
             try
             {
                 connInfo = ConfigurationManager.ConnectionStrings["connect"].ConnectionString;
+                r.Validate(connInfo);
+            }
+            catch (ArgumentException e)
+            {
+                throw new ArgumentException("The connection string is not valid!");
             }
             catch(Exception ex)
             {
 				throw new ArgumentException("Connection String connect was not found in app.config! Execution aborted");
             }
-            check(connInfo);
             return connInfo;
         }
 
@@ -53,21 +58,6 @@ namespace MySql_Windows_Forms_Project1
             return adapter;
         }
 
-        public static void check(String str)
-        {
-            RegexStringValidator r = new RegexStringValidator(@"^([^=;]+=[^=;]*)(;[^=;]+=[^=;]*)*;?$");
-            RegexStringValidator r1 = new RegexStringValidator(@"\b(server|database|password|user id)\b");
-            try
-            {
-                r.Validate(str);
-                r1.Validate(str);
-                MessageBox.Show("Validated");
-            }
-            catch (ArgumentException e)
-            {
-                // Validation failed.
-                MessageBox.Show(String.Format("Error: {0}", e.Message.ToString()));
-            }
-        }
+
     }
 }
