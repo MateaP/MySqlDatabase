@@ -32,10 +32,17 @@ namespace MySql_Windows_Forms_Project1
 			InitializeComponent();
 		}
 		
+		private IDbDataAdapter returnAdapter()
+		{
+			return new MySqlDataAdapter();
+		}
+		
 		private void frmperson_Load(object sender, EventArgs e)
 		{
-            ad = new MySqlDataAdapter("select * from `person`", (MySqlConnection)Connection.provideConnection());
-            DbCommandBuilder builder = new MySqlCommandBuilder();
+            IDbCommand idbCommand = Connection.provideConnection().CreateCommand();
+            idbCommand.CommandText = "select * from `person`";
+            IDataReader idReader = idbCommand.ExecuteReader();
+          
             builder.DataAdapter = (MySqlDataAdapter)ad;
 			ad.Fill(this.newDataSet);
 			ad.DeleteCommand = builder.GetDeleteCommand();
