@@ -1,12 +1,13 @@
-﻿using System;
+﻿//iskluci gi visokot using
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
+--using System.Data;
+--using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using MySql.Data.MySqlClient;
+--using MySql.Data.MySqlClient;
 using System.Configuration;
 
 namespace MySql_Windows_Forms_Project1
@@ -52,6 +53,9 @@ namespace MySql_Windows_Forms_Project1
 			
         }
 
+		//info za metodata
+		//namesto konkretna implementacija da vraka IDbConnection
+		//dali e thread safe metodata
         public static MySqlConnection provideConnection()
         {
             if (instance == null)
