@@ -34,6 +34,7 @@ namespace MySql_Windows_Forms_Project1
             {
 				throw new ArgumentException("Connection String connect was not found in app.config! Execution aborted");
             }
+            check(connInfo);
             return connInfo;
         }
 
@@ -50,6 +51,23 @@ namespace MySql_Windows_Forms_Project1
                 throw new ArgumentException("Connection String connect was found in app.config but the connection can not be established! Execution aborted");
             }
             return adapter;
+        }
+
+        public static void check(String str)
+        {
+            RegexStringValidator r = new RegexStringValidator(@"^([^=;]+=[^=;]*)(;[^=;]+=[^=;]*)*;?$");
+            RegexStringValidator r1 = new RegexStringValidator(@"\b(server|database|password|user id)\b");
+            try
+            {
+                r.Validate(str);
+                r1.Validate(str);
+                MessageBox.Show("Validated");
+            }
+            catch (ArgumentException e)
+            {
+                // Validation failed.
+                MessageBox.Show(String.Format("Error: {0}", e.Message.ToString()));
+            }
         }
     }
 }
