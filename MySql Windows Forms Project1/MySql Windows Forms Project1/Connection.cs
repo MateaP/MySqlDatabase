@@ -11,7 +11,6 @@ using System.Configuration;
 
 namespace MySql_Windows_Forms_Project1
 {
-	//singleton object da bide, objektot koj ke vraka konekcija
     public class Connection
     {
         private static Connection instance;
