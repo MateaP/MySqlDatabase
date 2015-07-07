@@ -11,25 +11,30 @@ using System.Configuration;
 
 namespace MySql_Windows_Forms_Project1
 {
+	//singleton object da bide, objektot koj ke vraka konekcija
     public static class Connection
     {
 
         /*
         * Purpose : makes a connection with MySql server
-        * Input parameters : None
-        * returns : MySqlDataAdapter
+        * Preconditions : app.config must be present and connect connection string must exists
+		* Postconditions : Exceptio 
+		* Input parameters : None
+        * returns : Connection string validated
         * Date created : 06.07.2015
         * Date last changed : 06.07.2015
-        * Author : Matea
+        * Author (e-mail) : Matea
         */
-        public static string retrieveConnection()
+        public static string getConnString() --private
         {
             string connInfo = String.Empty;
+			//declarija so const constantata
             RegexStringValidator r = new RegexStringValidator(@"((.*(server|user id|password|database)=[^=;]*;){4})");
 
             try
             {
                 connInfo = ConfigurationManager.ConnectionStrings["connect"].ConnectionString;
+				//tuka treba da se stoi new
                 r.Validate(connInfo);
             }
             catch (ArgumentException e)
@@ -40,7 +45,10 @@ namespace MySql_Windows_Forms_Project1
             {
 				throw new ArgumentException("Connection String connect was not found in app.config! Execution aborted");
             }
-            return connInfo;
+			finally
+			{
+				return connInfo;
+			}
         }
 
         public static MySqlDataAdapter Connect(string command)
