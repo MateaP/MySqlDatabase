@@ -1,28 +1,23 @@
-﻿//iskluci gi visokot using
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
---using System.Data;
---using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
---using MySql.Data.MySqlClient;
+﻿using System;
 using System.Configuration;
+using System.Data;
+using MySql.Data.MySqlClient;
+
 
 namespace MySql_Windows_Forms_Project1
 {
     public class Connection
     {
         private static Connection instance;
-        private static MySqlConnection conn;
+        private static IDbConnection conn;
+        private static object syncRoot = new Object();
 
         private Connection() { }
 
         /*
-        * Purpose : makes a connection with MySql server
+        * Purpose : returns connestion string
         * Preconditions : app.config must be present and connect connection string must exists
-		* Postconditions : Exceptio 
+		* Postconditions : Exception 
 		* Input parameters : None
         * returns : Connection string validated
         * Date created : 06.07.2015
@@ -53,22 +48,34 @@ namespace MySql_Windows_Forms_Project1
 			
         }
 
-		//info za metodata
-		//namesto konkretna implementacija da vraka IDbConnection
-		//dali e thread safe metodata
-        public static MySqlConnection provideConnection()
+        /*
+        * Purpose : makes a connection with MySql server
+        * Preconditions : connection string must exists
+		* Postconditions : Exception 
+		* Input parameters : None
+        * returns : IDbConnection 
+        * Date created : 06.07.2015
+        * Date last changed : 07.07.2015
+        * Author (e-mail) : Matea matea@edusoft.com.mk
+        */
+        public static IDbConnection provideConnection()
         {
             if (instance == null)
             {
-                instance = new Connection();
-                string str = getConnString();
-                try
+                lock (syncRoot)
                 {
-                    conn = new MySqlConnection(str);
-                }
-                catch (Exception ex)
-                {
-                    throw ex;                  
+                    instance = new Connection();
+                    string str = getConnString();
+                    try
+                    {
+                        conn = new MySqlConnection();
+                        conn.ConnectionString = str;
+                        conn.Open();
+                    }
+                    catch (Exception ex)
+                    {
+                        throw ex;
+                    }
                 }
             }
             return conn;
