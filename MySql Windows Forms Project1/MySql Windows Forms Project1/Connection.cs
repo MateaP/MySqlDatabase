@@ -60,9 +60,9 @@ namespace MySql_Windows_Forms_Project1
         */
         public static IDbConnection provideConnection()
         {
-            if (instance == null)
+            lock (syncRoot)
             {
-                lock (syncRoot)
+                if (instance == null)
                 {
                     instance = new Connection();
                     string str = getConnString();

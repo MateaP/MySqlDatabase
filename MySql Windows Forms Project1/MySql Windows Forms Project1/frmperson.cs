@@ -18,12 +18,14 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
+using System.Data.Common;
 
 namespace MySql_Windows_Forms_Project1
 {
 	public partial class frmperson : Form
 	{
-		private MySqlDataAdapter ad;
+        private IDbDataAdapter ad;
+
 		
 		public frmperson()
 		{
@@ -33,8 +35,9 @@ namespace MySql_Windows_Forms_Project1
 		private void frmperson_Load(object sender, EventArgs e)
 		{
             ad = new MySqlDataAdapter("select * from `person`", (MySqlConnection)Connection.provideConnection());
-			MySqlCommandBuilder builder = new MySqlCommandBuilder(ad);
-			ad.Fill(this.newDataSet.person);
+            DbCommandBuilder builder = new MySqlCommandBuilder();
+            builder.DataAdapter = (MySqlDataAdapter)ad;
+			ad.Fill(this.newDataSet);
 			ad.DeleteCommand = builder.GetDeleteCommand();
 			ad.UpdateCommand = builder.GetUpdateCommand();
 			ad.InsertCommand = builder.GetInsertCommand();
