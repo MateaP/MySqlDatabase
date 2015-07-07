@@ -12,8 +12,12 @@ using System.Configuration;
 namespace MySql_Windows_Forms_Project1
 {
 	//singleton object da bide, objektot koj ke vraka konekcija
-    public static class Connection
+    public class Connection
     {
+        private static Connection instance;
+        private static MySqlConnection conn;
+
+        private Connection() { }
 
         /*
         * Purpose : makes a connection with MySql server
@@ -23,18 +27,17 @@ namespace MySql_Windows_Forms_Project1
         * returns : Connection string validated
         * Date created : 06.07.2015
         * Date last changed : 06.07.2015
-        * Author (e-mail) : Matea
+        * Author (e-mail) : Matea matea@edusoft.com.mk
         */
-        public static string getConnString() --private
+        private static string getConnString() 
         {
             string connInfo = String.Empty;
-			//declarija so const constantata
-            RegexStringValidator r = new RegexStringValidator(@"((.*(server|user id|password|database)=[^=;]*;){4})");
-
+            const string regex = @"((.*(server|user id|password|database)=[^=;]*;){4})";
+             
             try
             {
                 connInfo = ConfigurationManager.ConnectionStrings["connect"].ConnectionString;
-				//tuka treba da se stoi new
+				RegexStringValidator r = new RegexStringValidator(regex);
                 r.Validate(connInfo);
             }
             catch (ArgumentException e)
@@ -45,25 +48,27 @@ namespace MySql_Windows_Forms_Project1
             {
 				throw new ArgumentException("Connection String connect was not found in app.config! Execution aborted");
             }
-			finally
-			{
-				return connInfo;
-			}
+			
+            return connInfo;
+			
         }
 
-        public static MySqlDataAdapter Connect(string command)
+        public static MySqlConnection provideConnection()
         {
-            MySqlDataAdapter adapter = null;
-            string str = retrieveConnection();
-            try
-            {         
-                adapter = new MySqlDataAdapter(command, str);
-            }
-            catch(Exception ex)
+            if (instance == null)
             {
-                throw new ArgumentException("Connection String connect was found in app.config but the connection can not be established! Execution aborted");
+                instance = new Connection();
+                string str = getConnString();
+                try
+                {
+                    conn = new MySqlConnection(str);
+                }
+                catch (Exception ex)
+                {
+                    throw ex;                  
+                }
             }
-            return adapter;
+            return conn;
         }
 
 

@@ -32,7 +32,7 @@ namespace MySql_Windows_Forms_Project1
 		
 		private void frmanimals_Load(object sender, EventArgs e)
 		{
-            ad = Connection.Connect("select * from `animals`");
+            ad = new MySqlDataAdapter("select * from `animals`", Connection.provideConnection());
             MySqlCommandBuilder builder = new MySqlCommandBuilder(ad);
 			ad.Fill(this.newDataSet.animals);
 			ad.DeleteCommand = builder.GetDeleteCommand();
