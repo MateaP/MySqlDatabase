@@ -46,7 +46,7 @@ namespace MySql_Windows_Forms_Project1
             DbCommandBuilder builder = returnBuilder();
             builder.DataAdapter = ad;
             ad.SelectCommand = idbCommand;
-            ad.Fill(this.newDataSet.person);
+            ad.Fill(this.newDataSet.animals1);
 			ad.DeleteCommand = builder.GetDeleteCommand();
 			ad.UpdateCommand = builder.GetUpdateCommand();
 			ad.InsertCommand = builder.GetInsertCommand();
