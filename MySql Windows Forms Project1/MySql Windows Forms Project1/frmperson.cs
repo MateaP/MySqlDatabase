@@ -9,22 +9,17 @@
 * ++++++++++++++++++++++++++++++++++++++++++++++++++
 * */
 
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
 using MySql.Data.MySqlClient;
+using System;
+using System.ComponentModel;
 using System.Data.Common;
+using System.Windows.Forms;
 
 namespace MySql_Windows_Forms_Project1
 {
 	public partial class frmperson : Form
 	{
-        private IDbDataAdapter ad;
+        private DbDataAdapter ad;
 
 		
 		public frmperson()
@@ -32,19 +27,25 @@ namespace MySql_Windows_Forms_Project1
 			InitializeComponent();
 		}
 		
-		private IDbDataAdapter returnAdapter()
+		private DbDataAdapter returnAdapter()
 		{
 			return new MySqlDataAdapter();
 		}
-		
+
+        private DbCommandBuilder returnBuilder()
+        {
+            return new MySqlCommandBuilder();
+        }	
+	
 		private void frmperson_Load(object sender, EventArgs e)
 		{
-            IDbCommand idbCommand = Connection.provideConnection().CreateCommand();
+            DbCommand idbCommand = Connection.provideConnection().CreateCommand();
             idbCommand.CommandText = "select * from `person`";
-            IDataReader idReader = idbCommand.ExecuteReader();
-          
-            builder.DataAdapter = (MySqlDataAdapter)ad;
-			ad.Fill(this.newDataSet);
+            ad = returnAdapter();
+            DbCommandBuilder builder = returnBuilder();
+            builder.DataAdapter = ad;
+            ad.SelectCommand = idbCommand;
+            ad.Fill(this.newDataSet.person);
 			ad.DeleteCommand = builder.GetDeleteCommand();
 			ad.UpdateCommand = builder.GetUpdateCommand();
 			ad.InsertCommand = builder.GetInsertCommand();
@@ -56,7 +57,7 @@ namespace MySql_Windows_Forms_Project1
 		{
 			if (!this.Validate()) return;
 			personBindingSource.EndEdit();
-			ad.Update(this.newDataSet.person);
+			ad.Update(this.newDataSet);
 			
 		}
 		

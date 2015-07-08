@@ -2,6 +2,7 @@
 using System.Configuration;
 using System.Data;
 using MySql.Data.MySqlClient;
+using System.Data.Common;
 
 
 namespace MySql_Windows_Forms_Project1
@@ -9,7 +10,7 @@ namespace MySql_Windows_Forms_Project1
     public class Connection
     {
         private static Connection instance;
-        private static IDbConnection conn;
+        private static DbConnection conn;
         private static object syncRoot = new Object();
 
         private Connection() { }
@@ -58,7 +59,7 @@ namespace MySql_Windows_Forms_Project1
         * Date last changed : 07.07.2015
         * Author (e-mail) : Matea matea@edusoft.com.mk
         */
-        public static IDbConnection provideConnection()
+        public static DbConnection provideConnection()
         {
             lock (syncRoot)
             {

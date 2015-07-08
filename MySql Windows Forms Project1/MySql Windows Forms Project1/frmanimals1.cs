@@ -9,32 +9,44 @@
 * ++++++++++++++++++++++++++++++++++++++++++++++++++
 * */
 
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
+
+
 using MySql.Data.MySqlClient;
+using System;
+using System.ComponentModel;
+using System.Data.Common;
+using System.Windows.Forms;
 
 namespace MySql_Windows_Forms_Project1
 {
 	public partial class frmanimals1 : Form
 	{
-		private MySqlDataAdapter ad;
+        private DbDataAdapter ad;
 		
 		public frmanimals1()
 		{
 			InitializeComponent();
 		}
+
+        private DbDataAdapter returnAdapter()
+        {
+            return new MySqlDataAdapter();
+        }
+
+        private DbCommandBuilder returnBuilder()
+        {
+            return new MySqlCommandBuilder();
+        }	
 		
 		private void frmanimals1_Load(object sender, EventArgs e)
 		{
-            ad = new MySqlDataAdapter("select * from `animals1`", (MySqlConnection)Connection.provideConnection());
-            MySqlCommandBuilder builder = new MySqlCommandBuilder(ad);
-			ad.Fill(this.newDataSet.animals1);
+            DbCommand idbCommand = Connection.provideConnection().CreateCommand();
+            idbCommand.CommandText = "select * from `animals1`";
+            ad = returnAdapter();
+            DbCommandBuilder builder = returnBuilder();
+            builder.DataAdapter = ad;
+            ad.SelectCommand = idbCommand;
+            ad.Fill(this.newDataSet.person);
 			ad.DeleteCommand = builder.GetDeleteCommand();
 			ad.UpdateCommand = builder.GetUpdateCommand();
 			ad.InsertCommand = builder.GetInsertCommand();
